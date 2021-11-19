@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Temporada extends Model
 {
-    protected $fillable = ['numero'];
-
     public function episodios()
     {
         return $this->hasMany(Episodio::class);
