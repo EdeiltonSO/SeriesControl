@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
 use Illuminate\Http\Request;
-use App\Models\Serie;
+use App\Models\{ Serie, Temporada, Episodio };
 
 class SeriesController extends Controller
 {
@@ -28,11 +28,16 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $req)
     {
-        /* $serie = Serie::create([
-            'nome' => $req->nome
-        ]); */
-        $serie = Serie::create($req->all());
-        // dd($serie->toArray());
+        //$serie = Serie::create($req->all());
+        $serie = Serie::create(['nome' => $req->nome]);
+        $qtdTemporadas = Temporada::create(['qtd' => $req->temporada]);
+
+
+
+        //$qtdEpisodios = Episodio::create($req->all());
+
+        //dd($serie->toArray());
+        dd($qtdTemporadas);
         // dump($serie);
 
         $req->session()->flash('mensagem', "Série {$serie->nome} com id {$serie->id} adicionada com sucesso");

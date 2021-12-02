@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Serie extends Model
 {
     // public $timestamps = false;
-    protected $fillable = ['nome'];
+    protected $fillable = ['nome']; // relacionado ao banco
 
     public function temporadas()
     {
