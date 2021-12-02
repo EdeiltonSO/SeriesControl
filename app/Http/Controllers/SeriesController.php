@@ -14,10 +14,7 @@ class SeriesController extends Controller
         $series = Serie::query()->orderBy('nome')->get(); // ordem alfabética
 
         $mensagem = $req->session()->get('mensagem');
-
-        // $req->session()->remove('mensagem');
-
-        // return view('series.index', compact('series'));
+        //dd($series);
         return view('series.index', [ 'series' => $series, 'mensagem' => $mensagem ]);
     }
 
@@ -28,25 +25,49 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $req)
     {
-        //$serie = Serie::create($req->all());
-        $serie = Serie::create(['nome' => $req->nome]);
-        $qtdTemporadas = Temporada::create(['qtd' => $req->temporada]);
+        // $serie = Serie::create(['nome' => $req->nome]);
+        // $qtdTemporadas = Temporada::create(['qtd' => $req->temporada]);
 
+        /// por que essas duas formas de obter esses dados?
+        /// não poderia ser de um jeito só?
+        $serie = Serie::create($req->all());
+        $qtdTemporadas = $req->qtd_temporadas;
+        $epPorTemporada = $req->ep_por_temporada;
 
+        for($i = 1; $i <= $qtdTemporadas; $i++){
+            $temporada = $serie->temporadas()->create(['numero' => $i]);
 
-        //$qtdEpisodios = Episodio::create($req->all());
+            for ($j = 1; $j <= $epPorTemporada; $j++) {
+                $temporada->episodios()->create(['numero' => $j]);
+            }
+        }
 
-        //dd($serie->toArray());
-        dd($qtdTemporadas);
-        // dump($serie);
+        // dd($serie);
 
-        $req->session()->flash('mensagem', "Série {$serie->nome} com id {$serie->id} adicionada com sucesso");
+        $req->session()
+            ->flash(
+                'mensagem',
+                "Série {$serie->nome} (com id {$serie->id} e suas temporadas e episódios) adicionada com sucesso"
+            );
 
         return redirect()->route('listar_series');
     }
 
     public function destroy(Request $req)
     {
+        dd($req->id);
+
+        /*
+        A linha abaixo apaga uma série pelo id,
+        mas uma série tem várias temporadas
+        e cada temporada tem vários episódios.
+
+        Como informar que quero apagar todos os
+        registros de temporadas e episódios
+        de uma série quando eu apagar ela?
+
+        keywords: cascade, cascata
+        */
         Serie::destroy($req->id);
 
         $req->session()->flash('mensagem', "Série removida com sucesso");

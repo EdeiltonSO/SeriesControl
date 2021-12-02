@@ -31,7 +31,7 @@ Adicionar série
 
         <div class="col col-2">
             <label for="qtd_episodios">Episódios</label>
-            <input type="number" name="qtd_episodios" id="qtd_episodios" class="form-control">
+            <input type="number" name="ep_por_temporada" id="ep_por_temporada" class="form-control">
         </div>
     </div>
     <button class="btn btn-primary mt-3">Adicionar</button>
