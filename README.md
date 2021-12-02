@@ -21,7 +21,9 @@ Se sua máquina estiver rodando Ubuntu ou algo parecido, a sequência é essa:
 4. Execute `composer install`;
 5. Execute `cp .env.example .env`;
 6. No arquivo .env criado:
+
     6.1. Substitua `DB_CONNECTION=mysql` por `DB_CONNECTION=sqlite`;
+    
     6.2. Comente (usando #) ou apague as 5 linhas seguintes;
 7. Execute `sudo apt-get install php-sqlite3`;
 8. Crie o arquivo `database.sqlite` na pasta `database`;
