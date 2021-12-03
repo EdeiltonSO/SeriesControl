@@ -25,11 +25,6 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $req)
     {
-        // $serie = Serie::create(['nome' => $req->nome]);
-        // $qtdTemporadas = Temporada::create(['qtd' => $req->temporada]);
-
-        /// por que essas duas formas de obter esses dados?
-        /// não poderia ser de um jeito só?
         $serie = Serie::create($req->all());
         $qtdTemporadas = $req->qtd_temporadas;
         $epPorTemporada = $req->ep_por_temporada;
@@ -41,8 +36,6 @@ class SeriesController extends Controller
                 $temporada->episodios()->create(['numero' => $j]);
             }
         }
-
-        // dd($serie);
 
         $req->session()
             ->flash(
@@ -68,6 +61,7 @@ class SeriesController extends Controller
 
         keywords: cascade, cascata
         */
+        
         Serie::destroy($req->id);
 
         $req->session()->flash('mensagem', "Série removida com sucesso");

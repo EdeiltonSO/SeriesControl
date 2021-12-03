@@ -25,7 +25,7 @@ Se sua máquina estiver rodando Ubuntu ou algo parecido, a sequência é essa:
     6.1. Substitua `DB_CONNECTION=mysql` por `DB_CONNECTION=sqlite`;
     
     6.2. Comente (usando #) ou apague as 5 linhas seguintes;
-7. Execute `php artisan key:g`
+7. Execute `php artisan key:g`;
 8. Execute `sudo apt-get install php-sqlite3`;
 9. Crie o arquivo `database.sqlite` na pasta `database`;
 10. Execute `php artisan migrate`;
