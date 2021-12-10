@@ -18,11 +18,17 @@ Lista de séries
     @foreach($series as $serie)
         <li class="list-group-item d-flex justify-content-between align-items-center">
             {{ $serie->nome }}
-            <form action="/series/{{ $serie->id }}" method="post" onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($serie->nome) }}?')">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger btn-sm"><i class="lni lni-trash-can"></i></button>
-            </form>
+
+            <span class="d-flex">
+                <a href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm mr-1">
+                    <i class="lni lni-link"></i>
+                </a>
+                <form action="/series/{{ $serie->id }}" method="post" onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($serie->nome) }}?')">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-sm"><i class="lni lni-trash-can"></i></button>
+                </form>
+            </span>
         </li>
     @endforeach
 </ul>

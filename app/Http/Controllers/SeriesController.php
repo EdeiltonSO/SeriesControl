@@ -25,7 +25,8 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $req)
     {
-        $serie = Serie::create($req->all());
+        //dd($req);
+        $serie = Serie::create(['nome' => $req->nome]);
         $qtdTemporadas = $req->qtd_temporadas;
         $epPorTemporada = $req->ep_por_temporada;
 
@@ -48,7 +49,7 @@ class SeriesController extends Controller
 
     public function destroy(Request $req)
     {
-        dd($req->id);
+        //dd($req->id);
 
         /*
         A linha abaixo apaga uma série pelo id,
@@ -61,7 +62,7 @@ class SeriesController extends Controller
 
         keywords: cascade, cascata
         */
-        
+
         Serie::destroy($req->id);
 
         $req->session()->flash('mensagem', "Série removida com sucesso");
