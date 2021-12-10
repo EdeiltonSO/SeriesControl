@@ -45,24 +45,20 @@ class SeriesController extends Controller
 
     public function destroy(Request $req)
     {
-        //dd($req->id);
+        // encontrando série no banco
+        $serie = Serie::find($req->id);
+        $nomeSerie = $serie->nome;
+        // excluindo relações com temporada e episódio
+        $serie->temporadas->each(function (Temporada $temporada) {
+            $temporada->episodios->each(function (Episodio $episodio) {
+                $episodio->delete();
+            });
+            $temporada->delete();
+        });
+        $serie->delete();
 
-        /*
-        A linha abaixo apaga uma série pelo id,
-        mas uma série tem várias temporadas
-        e cada temporada tem vários episódios.
-
-        Como informar que quero apagar todos os
-        registros de temporadas e episódios
-        de uma série quando eu apagar ela?
-
-        keywords: cascade, cascata
-        */
-
-        Serie::destroy($req->id);
-
-        $req->session()->flash('mensagem', "Série removida com sucesso");
-
+        // Serie::destroy($req->id);
+        $req->session()->flash('mensagem', "Série $nomeSerie removida com sucesso");
         return redirect()->route('listar_series');
     }
 }
