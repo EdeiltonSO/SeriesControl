@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
 use Illuminate\Http\Request;
-use App\Models\{ Serie, Temporada, Episodio };
-use App\Services\SeriesCreator;
+use App\Models\Serie;
+use App\Services\{ SeriesCreator, SeriesRemover };
 
 class SeriesController extends Controller
 {
@@ -43,26 +43,11 @@ class SeriesController extends Controller
         return redirect()->route('listar_series');
     }
 
-    public function destroy(Request $req)
+    public function destroy(Request $req, SeriesRemover $srm)
     {
-        //dd($req->id);
-
-        /*
-        A linha abaixo apaga uma série pelo id,
-        mas uma série tem várias temporadas
-        e cada temporada tem vários episódios.
-
-        Como informar que quero apagar todos os
-        registros de temporadas e episódios
-        de uma série quando eu apagar ela?
-
-        keywords: cascade, cascata
-        */
-
-        Serie::destroy($req->id);
-
-        $req->session()->flash('mensagem', "Série removida com sucesso");
-
+        $nomeSerie = $srm->removeSerie($req->id);
+        // Serie::destroy($req->id);
+        $req->session()->flash('mensagem', "Série $nomeSerie removida com sucesso");
         return redirect()->route('listar_series');
     }
 }
