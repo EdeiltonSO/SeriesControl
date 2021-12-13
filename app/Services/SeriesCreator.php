@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Models\Serie;
+use Illuminate\Support\Facades\DB;
 
 class SeriesCreator
 {
     public function criaSerie(string $nomeSerie, int $nTemporadas, int $epPorTemporada): Serie
     {
+        DB::beginTransaction();
         $serie = Serie::create(['nome' => $nomeSerie]);
         $qtdTemporadas = $nTemporadas;
         $epPorTemporada = $epPorTemporada;
@@ -19,6 +21,7 @@ class SeriesCreator
                 $temporada->episodios()->create(['numero' => $j]);
             }
         }
+        DB::commit(); // se precisar, tem o DB::rollback();
 
         return $serie;
     }
