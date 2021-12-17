@@ -16,7 +16,7 @@ Uma aplicação feita com Laravel durante as aulas do curso de Laravel da Alura.
 Se sua máquina estiver rodando Ubuntu ou algo parecido, a sequência é essa:
 
 1. Faça o `git clone` do repositório;
-2. Entre na pasta criada usando `cd SeriesControl`;
+2. Entre na pasta criada usando `cd series-control`;
 3. Caso não tenha, instale o [PHP 8](https://www.php.net/downloads) e o [Composer](https://getcomposer.org/);
 4. Execute `composer install`;
 5. Execute `cp .env.example .env`;
