@@ -8,7 +8,9 @@ Lista de séries
 
 @include('mensagem', ['mensagem' => $mensagem])
 
+@auth
 <a href="{{ route('form_criar_serie') }}" class="btn btn-dark mb-2">Adicionar</a>
+@endauth
 
 <ul class="list-group">
     @foreach($series as $serie)
@@ -26,17 +28,25 @@ Lista de séries
             </div>
 
             <span class="d-flex">
+
+                @auth
                 <button class="btn btn-info btn-sm mr-1" onclick="toggleInput({{ $serie->id }})">
                     <i class="lni lni-pencil-alt"></i>
                 </button>
+                @endauth
+
                 <a href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm mr-1">
                     <i class="lni lni-link"></i>
                 </a>
+
+                @auth
                 <form action="/series/{{ $serie->id }}" method="post" onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($serie->nome) }}?')">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm"><i class="lni lni-trash-can"></i></button>
                 </form>
+                @endauth
+
             </span>
         </li>
     @endforeach
