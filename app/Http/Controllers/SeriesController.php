@@ -9,9 +9,11 @@ use App\Services\{ SeriesCreator, SeriesRemover };
 
 class SeriesController extends Controller
 {
+    /*
     public function __construct() {
         $this->middleware('auth');
     }
+    */
 
     public function index(Request $req) {
 
