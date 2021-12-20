@@ -31,3 +31,7 @@ Se sua máquina estiver rodando Ubuntu ou algo parecido, a sequência é essa:
 10. Execute `php artisan migrate`;
 11. Execute `php artisan serve`;
 12. Acesse `localhost:8000/series` (ou outra porta disponibilizada pelo Artisan);
+
+## Como rodar os testes?
+
+1. Execute `vendor/bin/phpunit` no terminal;
