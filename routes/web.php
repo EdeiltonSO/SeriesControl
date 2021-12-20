@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SeriesController;
-use App\Http\Controllers\TemporadasController;
-use App\Http\Controllers\EpisodiosController;
-use App\Http\Controllers\EntrarController;
+use App\Http\Controllers\{
+    SeriesController,
+    TemporadasController,
+    EpisodiosController,
+    EntrarController,
+    RegistroController
+};
 
 // Route::get('/series', 'SeriesController@listarSeries');
 Route::get('/', function () { return redirect('/series'); });
@@ -27,3 +30,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Auth própria
 Route::get('/entrar', [EntrarController::class, 'index']);
 Route::post('/entrar', [EntrarController::class, 'entrar']);
+
+Route::get('/registrar', [RegistroController::class, 'create']);
+Route::post('/registrar', [RegistroController::class, 'store']);
